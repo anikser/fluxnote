@@ -1,4 +1,4 @@
-const socket = io.connect('https://192.168.11.141');
+const socket = io.connect('https://localhost:443');
 
 window.onload = function () {
   Positioning.init((xcomp, ycomp)=>{
@@ -6,6 +6,7 @@ window.onload = function () {
   });
 };
 
+/*
 $('#drawToggle').on('click', ()=>{
   
   if($('#drawToggle').hasClass('enable')){
@@ -18,3 +19,4 @@ $('#drawToggle').on('click', ()=>{
 
   //togglebutton
 });
+*/
