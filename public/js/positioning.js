@@ -3,6 +3,7 @@ const Positioning = (function () {
   const CALIBRATE_SECONDS = 5;
   const MAX_MAGNITUDE = 17;
   const MIN_MAGNITUDE = 10;
+  const LIFT_THRESHOLD = 0.72;
 
   let module = {};
   let sensor;
@@ -25,14 +26,16 @@ const Positioning = (function () {
       let distance = getDistance();
       let reading = module.getReading();
       let angle = Math.atan2(reading.y, reading.x) / 1.5;
-      let xcomp = 0;
-      let ycomp = 0;
+      let xcomp = 0, ycomp = 0, hover = false;
       if (distance > 0) {
         xcomp = distance * Math.sin(angle);
         ycomp = distance * Math.cos(angle);
+        if (Math.abs(reading.z*(distance**2)) > LIFT_THRESHOLD) {
+         hover = true;
+        }
       }
-      callback(xcomp, ycomp);
-      console.log(Math.atan2(reading.y, reading.z) * (180/3.14159));
+      console.log(reading.z*(distance**2));
+      callback(xcomp, ycomp, hover);
     };
   }
 
@@ -90,7 +93,6 @@ const Positioning = (function () {
   function getMagnitude(){
     let reading = getCalibratedReading(sensor.x, sensor.y, sensor.z);
     let mag = Math.pow(reading.x ** 2 + reading.y ** 2 + reading.z ** 2, 1 / 2);
-    console.log("KEK", mag);
     return (mag - MIN_MAGNITUDE < 0) ? 0 : mag;
   }
 
