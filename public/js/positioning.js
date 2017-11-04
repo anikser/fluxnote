@@ -1,26 +1,33 @@
 const Positioning = (function () {
 
-  const CALIBRATE_SECONDS = 10;
+  const CALIBRATE_SECONDS = 5;
+  const MAX_MAGNITUDE = 10;
+  const MIN_MAGNITUDE = 1.6;
 
   let module = {};
   let sensor;
   let backgroundField = {};
 
-  module.init = () => {
-    sensor = new Magnetometer({frequency: 10});
+  module.init = (callback) => {
+    sensor = new Magnetometer({
+      frequency: 10
+    });
     sensor.start();
-    
-  };
-
-  module.kek = () => {
-    module.calibrate().then(read);
+    sensor.onerror = event => console.log(event.error.name, event.error.message);
+    module.calibrate().then(() => {
+      read(callback)
+    });
   };
 
   function read() {
     sensor.start();
     sensor.onreading = () => {
-      //console.log(backgroundField);
-      console.log(getCalibratedReading(sensor.x, sensor.y, sensor.z));
+      let magnitude = module.getMagnitude();
+      let reading = module.getReading();
+      let angle = Math.atan2(reading.y, reading.x) / 2;
+      let xcomp = (MAX_MAGNITUDE - magnitude) * Math.sin(angle);
+      let ycomp = (MAX_MAGNITUDE - magnitude) * Math.cos(angle);
+      console.log(magnitude, angle, xcomp, ycomp);
     };
   }
 
@@ -38,7 +45,6 @@ const Positioning = (function () {
       let r = 0;
       sensor.onreading = () => {
         r++;
-        console.log("succ");
         for (axis in sumField) {
           sumField[axis] += sensor[axis];
         }
@@ -57,12 +63,20 @@ const Positioning = (function () {
   }
 
   function getCalibratedReading(x, y, z) {
-
     return {
       x: x - backgroundField.x,
       y: y - backgroundField.y,
       z: z - backgroundField.z
     };
+  }
+
+  module.getReading = () => {
+    return getCalibratedReading(sensor.x, sensor.y, sensor.z);
+  }
+  module.getMagnitude = () => {
+    let reading = getCalibratedReading(sensor.x, sensor.y, sensor.z);
+    let mag = Math.pow(reading.x ** 2 + reading.y ** 2 + reading.z ** 2, 1 / 6);
+    return (mag - MIN_MAGNITUDE < 0) ? 0 : mag;
   }
 
   return module;
