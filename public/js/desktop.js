@@ -1,6 +1,6 @@
 const canvas = new fabric.Canvas('canvas');
-const brush = new fabric.PencilBrush(canvas)
-
+const brush = new fabric.PencilBrush(canvas);
+const socket = io.connect('https://localhost:443');
 
 let drawing = false;
 
@@ -12,7 +12,7 @@ window.onload = function () {
 socket.on('drawOn', ()=>{
   drawing = true;
 });
- 
+
 socket.on('drawOff', ()=>{
   drawing = false;
 });

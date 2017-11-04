@@ -1,4 +1,4 @@
-var socket = io.connect('https://192.168.11.141');
+const socket = io.connect('https://192.168.11.141');
 
 window.onload = function () {
   Positioning.init((xcomp, ycomp)=>{
