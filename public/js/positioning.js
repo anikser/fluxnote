@@ -1,5 +1,5 @@
 const Positioning = (function () {
-
+  
   const CALIBRATE_SECONDS = 5;
   const MAX_MAGNITUDE = 17;
   const MIN_MAGNITUDE = 10;
@@ -10,6 +10,7 @@ const Positioning = (function () {
   let backgroundField = {};
 
   module.init = (callback) => {
+    console.log('Initializing positioning service...')
     sensor = new Magnetometer({
       frequency: 10
     });

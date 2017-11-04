@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  #canvas-buttons
+    .calibrate
+      .calibrate-button Calibrate
+    .brush-options
+      -let brushtypes = ['Thick', 'Thin', 'Airbrush', 'Erase']
+      each brush in brushtypes
+        .brush-button #{brush}
+  
+  script(src="js/positioning.js")
+  script(src="js/device.js")
