@@ -1,13 +1,25 @@
+const canvas = new fabric.Canvas('canvas');
+const brush = new fabric.PencilBrush(canvas)
+
+
 let drawing = false;
 
-var canvas = new fabric.Canvas('canvas');
-var brush = new fabric.PencilBrush(canvas)
-
 window.onload = function () {
-  Positioning.init(draw);
-  canvas.setWidth(300);
-  canvas.setHeight(200);
+  canvas.setWidth(window.innerHeight);
+  canvas.setHeight(window.outerHeight);
 };
+
+socket.on('drawOn', ()=>{
+  drawing = true;
+});
+ 
+socket.on('drawOff', ()=>{
+  drawing = false;
+});
+
+socket.on('update', (data)=>{
+  draw(data.x, data.y);
+});
 
 function draw(x, y) {
   let location = {x: 150+x * 400, y: y * 400};
