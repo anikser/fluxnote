@@ -1,8 +1,8 @@
 const Positioning = (function () {
 
   const CALIBRATE_SECONDS = 5;
-  const MAX_MAGNITUDE = 10;
-  const MIN_MAGNITUDE = 1.6;
+  const MAX_MAGNITUDE = 17;
+  const MIN_MAGNITUDE = 10;
 
   let module = {};
   let sensor;
@@ -15,20 +15,33 @@ const Positioning = (function () {
     sensor.start();
     sensor.onerror = event => console.log(event.error.name, event.error.message);
     module.calibrate().then(() => {
-      read(callback)
+      read(callback);
     });
   };
 
-  function read() {
+  function read(callback) {
     sensor.start();
     sensor.onreading = () => {
-      let magnitude = module.getMagnitude();
+      let distance = getDistance();
       let reading = module.getReading();
-      let angle = Math.atan2(reading.y, reading.x) / 2;
-      let xcomp = (MAX_MAGNITUDE - magnitude) * Math.sin(angle);
-      let ycomp = (MAX_MAGNITUDE - magnitude) * Math.cos(angle);
-      console.log(magnitude, angle, xcomp, ycomp);
+      let angle = Math.atan2(reading.y, reading.x) / 1.5;
+      let xcomp = 0;
+      let ycomp = 0;
+      if (distance > 0) {
+        xcomp = distance * Math.sin(angle);
+        ycomp = distance * Math.cos(angle);
+      }
+      callback(xcomp, ycomp);
+      console.log(Math.atan2(reading.y, reading.z) * (180/3.14159));
     };
+  }
+
+  function scaledXComponent(x) {
+
+  }
+
+  function scaledYComponent(y) {
+
   }
 
   module.calibrate = () => {
@@ -73,10 +86,18 @@ const Positioning = (function () {
   module.getReading = () => {
     return getCalibratedReading(sensor.x, sensor.y, sensor.z);
   }
-  module.getMagnitude = () => {
+
+  function getMagnitude(){
     let reading = getCalibratedReading(sensor.x, sensor.y, sensor.z);
-    let mag = Math.pow(reading.x ** 2 + reading.y ** 2 + reading.z ** 2, 1 / 6);
+    let mag = Math.pow(reading.x ** 2 + reading.y ** 2 + reading.z ** 2, 1 / 2);
+    console.log("KEK", mag);
     return (mag - MIN_MAGNITUDE < 0) ? 0 : mag;
+  }
+
+  function getDistance() {
+    let mag = getMagnitude();
+    if (mag == 0) return 0;
+    return 1/Math.pow(mag, 1/3);
   }
 
   return module;
