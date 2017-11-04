@@ -1,14 +1,7 @@
 extends layout
 
 block content
-  #canvas-buttons
-    .calibrate
-      .calibrate-button Calibrate
-    .brush-options
-      -let brushtypes = ['Thick', 'Thin', 'Airbrush', 'Erase']
-      each brush in brushtypes
-        .brush-button #{brush}
+  <canvas id="canvas" width="300" height="200"></canvas>
 
-  script(src="js/drawing/fabric.js")
-  button(type="button" onclick="canvas.clear()") Clear
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.19/fabric.js')
   script(src="js/main.js")
