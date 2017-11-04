@@ -8,8 +8,8 @@ a {
 }
 
 .canvas-buttons{
-  height: 40px;
-  width: 100px;
+  height: 200px;
+  width: 300px;
 }
 
 .calibrate{
@@ -34,10 +34,19 @@ a {
 
 .brush-button{
   display: inline-block;
-  height: 20px;
-  width: 40px;
+  height: 40px;
+  width: 100px;
   background-color: white;
-  color: black;
-  border-radius: 5px;
-  border: 1px solid black;
+}
+
+#calibrate-container{
+  padding: 20px;
+}
+
+#brushes-container{
+  padding: 20px;
+}
+
+#erase-canvas-container{
+  padding: 20px;
 }

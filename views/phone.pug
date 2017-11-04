@@ -2,12 +2,25 @@ extends layout
 
 block content
   #canvas-buttons
-    .calibrate
-      .calibrate-button Calibrate
-    .brush-options
-      -let brushtypes = ['Thick', 'Thin', 'Airbrush', 'Erase']
-      each brush in brushtypes
-        .brush-button #{brush}
+    #calibrate-container
+      button#calibrateSensor.ui.button Calibrate
+    .ui.grid
+      .ui.row
+        .ui.icon.buttons
+          button.ui.button
+            i.bold.icon
+          button.ui.button
+            i.bold.icon
+          button.ui.button
+            i.bold.icon
+      .ui.row
+        .ui.buttons
+          button.color.ui.button.black(data-color="black") Black
+          button.color.ui.button.red(data-color="red") Red
+          button.color.ui.button.blue(data-color="blue") Blue
+
+    #erase-canvas-container
+      button#clearCanvas.ui.button Clear Canvas
   
   script(src="js/positioning.js")
   script(src="js/device.js")
