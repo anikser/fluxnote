@@ -16,7 +16,14 @@ block content
       button.color.ui.button.massive.red(data-color="red") Red
       button.color.ui.button.massive.blue(data-color="blue") Blue
     .ui.row.centered
-      button#clearCanvas.ui.basic.button.massive Clear Canvas
+      .ui.buttons
+        button#clearCanvas.ui.basic.button.huge
+          i.trash.icon
+          | &nbsp;Clear Canvas
+        button#undo.ui.basic.button.huge 
+          i.undo.icon
+          | &nbsp;Undo
+      
     button#calibrateSensor.circular.massive.ui.icon.button.red
       i.crosshairs.icon
 

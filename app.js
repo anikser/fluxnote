@@ -74,6 +74,9 @@ phoneio.on('connection', (socket) => {
   socket.on('changeBrushWidth', (data) => {
     desktopio.emit('changeBrushWidth', {width : data.width});
   });
+  socket.on('undo', () => {
+    desktopio.emit('undo');
+  });
 });
 
 console.log('app started.');

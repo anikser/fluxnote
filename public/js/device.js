@@ -27,6 +27,10 @@ window.onload = function () {
     socket.emit('canvasClear');
   });
 
+  $('#undo').click(() => {
+    socket.emit('undo');
+  });
+
   $('.ui.buttons button.color').click(function () {
     socket.emit('changeColor', {
       color: $(this).data('color')

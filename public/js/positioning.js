@@ -3,7 +3,7 @@ const Positioning = (function () {
   const CALIBRATE_SECONDS = 5;
   const MAX_MAGNITUDE = 17;
   const MIN_MAGNITUDE = 8;
-  const LIFT_THRESHOLD = 0.8;
+  const LIFT_THRESHOLD = 0.70;
 
   let module = {};
   let sensor;
