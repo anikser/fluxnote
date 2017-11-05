@@ -40,14 +40,6 @@ const Positioning = (function () {
     };
   }
 
-  function scaledXComponent(x) {
-
-  }
-
-  function scaledYComponent(y) {
-
-  }
-
   module.calibrate = () => {
     var promise = new Promise(function (resolve, reject) {
       if (!sensor) {

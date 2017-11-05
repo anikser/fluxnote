@@ -51,17 +51,23 @@ app.use((err, req, res, next) => {
 });
 
 console.log('Setting up socket.io event listeners...');
+let phoneio = io.of('/phone');
+let desktopio = io.of('/desktop');
 
-io.on('connection', (socket) => {
+phoneio.on('connection', (socket) => {
   console.log('Initiating connection...');
   socket.on('drawOn', () => {
-    socket.emit('drawOn')
+    desktopio.emit('drawOn');
   });
   socket.on('drawOff', () => {
-    socket.emit('drawOff')
+    desktopio.emit('drawOff');
   });
   socket.on('update', (data) => {
-    socket.emit('update', {x : data.x, y : data.y});
+    console.log(data.x);
+    desktopio.emit('update', {x : data.x, y : data.y, hover : data.hover});
+  });
+  socket.on('canvasClear', () => {
+    desktopio.emit('canvasClear');
   });
 });
 
