@@ -14,6 +14,7 @@ const Positioning = (function () {
     sensor = new Magnetometer({
       frequency: 10
     });
+    sensor.start();
     sensor.onerror = event => console.log(event.error.name, event.error.message);
     module.calibrate(null).then(() => {
       read(callback);
@@ -21,7 +22,6 @@ const Positioning = (function () {
   };
 
   function read(callback) {
-    sensor.start();
     sensor.onreading = () => {
       let distance = getDistance();
       let reading = module.getReading();
@@ -45,7 +45,6 @@ const Positioning = (function () {
         console.error("No sensor object");
         reject();
       }
-      sensor.start();
       let sumField = {
         x: 0.0,
         y: 0.0,
