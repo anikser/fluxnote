@@ -2,8 +2,8 @@ const Positioning = (function () {
   
   const CALIBRATE_SECONDS = 5;
   const MAX_MAGNITUDE = 17;
-  const MIN_MAGNITUDE = 10;
-  const LIFT_THRESHOLD = 0.72;
+  const MIN_MAGNITUDE = 8;
+  const LIFT_THRESHOLD = 0.8;
 
   let module = {};
   let sensor;
@@ -16,7 +16,7 @@ const Positioning = (function () {
     });
     sensor.start();
     sensor.onerror = event => console.log(event.error.name, event.error.message);
-    module.calibrate(null).then(() => {
+    module.calibrate().then(() => {
       read(callback);
     });
   };
@@ -34,24 +34,27 @@ const Positioning = (function () {
          hover = true;
         }
       }
-      //console.log(reading.z*(distance**2));
       callback(xcomp, ycomp, hover);
     };
   }
 
   module.calibrate = () => {
     var promise = new Promise(function (resolve, reject) {
-      if (!sensor) {
+      let csensor = new Magnetometer({
+        frequency: 10
+      });
+      if (!csensor) {
         console.error("No sensor object");
         reject();
       }
+      csensor.start();
       let sumField = {
         x: 0.0,
         y: 0.0,
         z: 0.0
       }
       let r = 0;
-      sensor.onreading = () => {
+      csensor.onreading = () => {
         r++;
         for (axis in sumField) {
           sumField[axis] += sensor[axis];

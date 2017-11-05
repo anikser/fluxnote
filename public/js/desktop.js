@@ -7,12 +7,12 @@ let drawing = false;
 window.onload = function () {
   canvas.setWidth(window.innerWidth);
   canvas.setHeight(window.innerHeight);
-  
-  socket.on('update', (data)=>{
+
+  socket.on('update', (data) => {
     draw(data.x, data.y, data.hover);
   });
-  
-  socket.on('canvasClear', () =>{
+
+  socket.on('canvasClear', () => {
     console.log('clearing');
     canvas.clear();
   });
@@ -27,11 +27,11 @@ window.onload = function () {
 
 };
 
-
-
 function draw(x, y, hover) {
-  let location = {x: 150+x * 400, y: y * 400};
-  console.log(location);
+  let location = {
+    x: window.innerWidth / 2 + x * 1000,
+    y: y * 1000 - 100
+  };
   if ((x == 0 && y == 0) || hover) {
     if (drawing) {
       drawing = false;
@@ -41,8 +41,7 @@ function draw(x, y, hover) {
     if (!drawing) {
       brush.onMouseDown(location);
       drawing = true;
-    } else {
-      brush.onMouseMove(location)
     }
+    brush.onMouseMove(location);
   }
 }
