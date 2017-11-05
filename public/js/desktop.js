@@ -5,14 +5,14 @@ const socket = io.connect('https://localhost:443/desktop');
 let drawing = false;
 
 window.onload = function () {
-  canvas.setWidth(window.innerHeight);
-  canvas.setHeight(window.outerHeight);
+  canvas.setWidth(window.innerWidth);
+  canvas.setHeight(window.innerHeight);
 
-  socket.on('drawOn', ()=>{
+  socket.on('drawOn', () => {
     drawing = true;
   });
   
-  socket.on('drawOff', ()=>{
+  socket.on('drawOff', () => {
     drawing = false;
   });
   

@@ -10,13 +10,12 @@ const Positioning = (function () {
   let backgroundField = {};
 
   module.init = (callback) => {
-    console.log('Initializing positioning service...')
+    console.log('Initializing positioning service...');
     sensor = new Magnetometer({
       frequency: 10
     });
-    sensor.start();
     sensor.onerror = event => console.log(event.error.name, event.error.message);
-    module.calibrate().then(() => {
+    module.calibrate(null).then(() => {
       read(callback);
     });
   };
@@ -46,6 +45,7 @@ const Positioning = (function () {
         console.error("No sensor object");
         reject();
       }
+      sensor.start();
       let sumField = {
         x: 0.0,
         y: 0.0,
@@ -59,12 +59,11 @@ const Positioning = (function () {
         }
       };
       setTimeout(() => {
-        sensor.onreading = null;
+        //sensor.onreading = null;
         for (axis in sumField) {
           backgroundField[axis] = sumField[axis] / r;
         }
         console.log("Calibrated!");
-        sensor.stop();
         resolve();
       }, CALIBRATE_SECONDS * 1000);
     });
