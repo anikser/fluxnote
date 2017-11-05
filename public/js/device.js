@@ -2,7 +2,7 @@ const socket = io.connect('https://192.168.11.141:443/phone');
 
 window.onload = function () {
   Positioning.init((xcomp, ycomp, ishover)=>{
-    console.log('updating..');
+    console.log(Positioning.getReading());
     socket.emit('update', {x : xcomp, y : ycomp, hover: ishover});
   });
 };
@@ -18,6 +18,10 @@ $('#clearCanvas').click(() => {
   socket.emit('clearCanvas');
 });
 
-$('button.color').click(() => {
+$('.ui.buttons button.color').click(function() {
   socket.emit('changeColor', {color: $(this).data('color')});
+});
+
+$('.ui.buttons button.size').click(function() {
+  socket.emit('changeBrushWidth', {width: $(this).data('width')});
 });

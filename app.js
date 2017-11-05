@@ -71,8 +71,8 @@ phoneio.on('connection', (socket) => {
   socket.on('changeColor', (data) => {
     desktopio.emit('changeColor', {color : data.color});
   });
-  socket.on('changeBrushSize', (data) => {
-    desktopio.emit('changeBrushSize', {size : data.size});
+  socket.on('changeBrushWidth', (data) => {
+    desktopio.emit('changeBrushWidth', {width : data.width});
   });
 });
 

@@ -7,45 +7,6 @@ a {
   color: #00B7FF;
 }
 
-.calibrate{
-  display: inline-block;
-  position: relative;
-  width: 20%;
-}
-
-.brush-options{
-  display: inline-block;
-  position: relative;
-  width: 80%;
-}
-
-.calibrate-button{
-  height: 20px;
-  width: 40px;
-  background-color: grey;
-  color: black;
-  border-radius: 5px;
-}
-
-.brush-button{
-  display: inline-block;
-  height: 40px;
-  width: 100px;
-  background-color: white;
-}
-
-#calibrate-container{
-  padding: 20px;
-}
-
-#canvas-buttons{
+#canvasButtons{
   padding-top: 30px;
-}
-
-#brushes-container{
-  padding: 20px;
-}
-
-#erase-canvas-container{
-  padding: 20px;
 }

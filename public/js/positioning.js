@@ -34,7 +34,7 @@ const Positioning = (function () {
          hover = true;
         }
       }
-      console.log(reading.z*(distance**2));
+      //console.log(reading.z*(distance**2));
       callback(xcomp, ycomp, hover);
     };
   }

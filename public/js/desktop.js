@@ -7,22 +7,24 @@ let drawing = false;
 window.onload = function () {
   canvas.setWidth(window.innerWidth);
   canvas.setHeight(window.innerHeight);
-
-  socket.on('drawOn', () => {
-    drawing = true;
-  });
-  
-  socket.on('drawOff', () => {
-    drawing = false;
-  });
   
   socket.on('update', (data)=>{
     draw(data.x, data.y, data.hover);
   });
   
   socket.on('canvasClear', () =>{
+    console.log('clearing');
     canvas.clear();
   });
+
+  socket.on('changeColor', (data) => {
+    brush.color = data.color;
+  });
+
+  socket.on('changeBrushWidth', (data) => {
+    brush.width = data.width;
+  });
+
 };
 
 
