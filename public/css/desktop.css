@@ -1,3 +1,18 @@
 body {
   background-color: #f1f1f1;
 }
+
+#clearButton, #downloadButton {
+  position: fixed;
+  bottom: 24px;
+}
+
+#downloadButton {
+  position: fixed;
+  right: 24px;
+}
+
+#clearButton {
+  position: fixed;
+  right: 86px;
+}

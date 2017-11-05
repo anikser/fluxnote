@@ -36,6 +36,14 @@ window.onload = function () {
     circle.set("radius", data.width / 1.5);
   });
 
+  $("#clearButton").click(() => {
+    canvas.clear();
+  });
+
+  $("#downloadButton").click(() => {
+    console.log("download");
+  });
+
 };
 
 function draw(x, y, hover) {
