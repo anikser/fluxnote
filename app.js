@@ -63,11 +63,16 @@ phoneio.on('connection', (socket) => {
     desktopio.emit('drawOff');
   });
   socket.on('update', (data) => {
-    console.log(data.x);
     desktopio.emit('update', {x : data.x, y : data.y, hover : data.hover});
   });
   socket.on('canvasClear', () => {
     desktopio.emit('canvasClear');
+  });
+  socket.on('changeColor', (data) => {
+    desktopio.emit('changeColor', {color : data.color});
+  });
+  socket.on('changeBrushSize', (data) => {
+    desktopio.emit('changeBrushSize', {size : data.size});
   });
 });
 

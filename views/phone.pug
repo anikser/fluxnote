@@ -1,6 +1,10 @@
 extends layout
 
 block content
+  div.ui.basic.modal
+    div.ui.header Calibrating...
+    div.ui.content 
+      p Please keep any magnetic objects away from the device.
   #canvas-buttons.ui.grid.one.column.centered
     .ui.row.centered
       .ui.icon.buttons
@@ -18,7 +22,7 @@ block content
       button#clearCanvas.ui.button.massive Clear Canvas
     .ui.row
       .ui.column.fourteen.wide.right.aligned
-        button.circular.massive.ui.icon.button.red
+        button#calibrateSensor.circular.massive.ui.icon.button.red
           i.crosshairs.icon
 
   script(src="js/positioning.js")

@@ -8,10 +8,16 @@ window.onload = function () {
 };
 
 $('#calibrateSensor').click(() => {
-  console.log('Calibrating...');
-  Positioning.calibrate();
+  $('.ui.basic.modal').modal({closable: false}).modal('show');
+  Positioning.calibrate().then(() => {
+    $('.ui.basic.modal').modal('hide');
+  });
 });
 
 $('#clearCanvas').click(() => {
   socket.emit('clearCanvas');
+});
+
+$('button.color').click(() => {
+  socket.emit('changeColor', {color: $(this).data('color')});
 });
