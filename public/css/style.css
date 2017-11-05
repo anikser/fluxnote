@@ -7,11 +7,6 @@ a {
   color: #00B7FF;
 }
 
-.canvas-buttons{
-  height: 200px;
-  width: 300px;
-}
-
 .calibrate{
   display: inline-block;
   position: relative;
@@ -41,6 +36,10 @@ a {
 
 #calibrate-container{
   padding: 20px;
+}
+
+#canvas-buttons{
+  padding-top: 30px;
 }
 
 #brushes-container{

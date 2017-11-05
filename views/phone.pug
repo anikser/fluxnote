@@ -1,26 +1,25 @@
 extends layout
 
 block content
-  #canvas-buttons
-    #calibrate-container
-      button#calibrateSensor.ui.button Calibrate
-    .ui.grid
-      .ui.row
-        .ui.icon.buttons
-          button.ui.button
-            i.bold.icon
-          button.ui.button
-            i.bold.icon
-          button.ui.button
-            i.bold.icon
-      .ui.row
-        .ui.buttons
-          button.color.ui.button.black(data-color="black") Black
-          button.color.ui.button.red(data-color="red") Red
-          button.color.ui.button.blue(data-color="blue") Blue
+  #canvas-buttons.ui.grid.one.column.centered
+    .ui.row.centered
+      .ui.icon.buttons
+        button.ui.button.massive
+          i.bold.icon
+        button.ui.button.massive
+          i.bold.icon
+        button.ui.button.massive
+          i.bold.icon
+    .ui.buttons
+      button.color.ui.button.massive.black(data-color="black") Black
+      button.color.ui.button.massive.red(data-color="red") Red
+      button.color.ui.button.massive.blue(data-color="blue") Blue
+    .ui.row.centered
+      button#clearCanvas.ui.button.massive Clear Canvas
+    .ui.row
+      .ui.column.fourteen.wide.right.aligned
+        button.circular.massive.ui.icon.button.red
+          i.crosshairs.icon
 
-    #erase-canvas-container
-      button#clearCanvas.ui.button Clear Canvas
-  
   script(src="js/positioning.js")
   script(src="js/device.js")
