@@ -7,23 +7,18 @@ block content
       p Please keep any magnetic objects away from the device.
   #canvasButtons.ui.grid.one.column.centered
     .ui.row.centered
-      .ui.icon.buttons
-        button.ui.button.size.massive(data-width="1")
-          i.bold.icon
-        button.ui.button.size.massive(data-width="3")
-          i.bold.icon
-        button.ui.button.size.massive(data-width="5")
-          i.bold.icon
+      .ui.buttons
+        button.ui.button.massive(data-width="1") S
+        button.ui.button.massive(data-width="5") M
+        button.ui.button.massive(data-width="10") L
     .ui.buttons
       button.color.ui.button.massive.black(data-color="black") Black
       button.color.ui.button.massive.red(data-color="red") Red
       button.color.ui.button.massive.blue(data-color="blue") Blue
     .ui.row.centered
-      button#clearCanvas.ui.button.massive Clear Canvas
-    .ui.row
-      .ui.column.fourteen.wide.right.aligned
-        button#calibrateSensor.circular.massive.ui.icon.button.red
-          i.crosshairs.icon
+      button#clearCanvas.ui.basic.button.massive Clear Canvas
+    button#calibrateSensor.circular.massive.ui.icon.button.red
+      i.crosshairs.icon
 
   script(src="js/positioning.js")
   script(src="js/device.js")

@@ -66,6 +66,9 @@ const Positioning = (function () {
           backgroundField[axis] = sumField[axis] / r;
         }
         console.log("Calibrated!");
+        if ($('.ui.basic.modal')[0]) {
+          $('.ui.basic.modal').modal('hide');
+        }
         resolve();
       }, CALIBRATE_SECONDS * 1000);
     });
