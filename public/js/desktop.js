@@ -71,8 +71,8 @@ function undo() {
 
 function draw(x, y, hover) {
   let location = {
-    x: window.innerWidth / 2 + x * 1560,
-    y: y * 1560 - 100
+    x: window.innerWidth / 2 + x * 2200,
+    y: y * 2400 - 100
   };
   if ((x == 0 && y == 0) || hover) {
     if (drawing) {
